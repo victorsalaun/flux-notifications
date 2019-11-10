@@ -1,0 +1,39 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: flux-notifications
+  namespace: flux
+spec:
+  selector:
+    name: flux-notifications
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flux-notifications
+  namespace: flux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: flux-notifications
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: flux-notifications
+    spec:
+      securityContext:
+        runAsUser: 999
+      containers:
+        - name: flux-notifications
+          image: victorsalaun/flux-notifications:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
