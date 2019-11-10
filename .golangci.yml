@@ -1,0 +1,16 @@
+run:
+  deadline: 2m
+
+linters:
+  disable-all: true
+  enable:
+    - gofmt
+    - goimports
+    - golint
+    - staticcheck
+    - gocyclo
+    - ineffassign
+    - misspell
+    - gocritic
+    - govet
+    - unconvert

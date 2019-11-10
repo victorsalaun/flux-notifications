@@ -1,0 +1,11 @@
+sudo: required
+dist: xenial
+language: go
+
+go:
+  - "1.13.x"
+
+jobs:
+  include:
+    - name: Build
+      script: make build
